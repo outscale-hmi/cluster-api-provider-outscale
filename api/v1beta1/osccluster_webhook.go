@@ -61,9 +61,14 @@ func (r *OscCluster) ValidateUpdate(oldRaw runtime.Object) error {
 	oscClusterLog.Info("validate update", "name", r.Name)
 	var allErrs field.ErrorList
 	old := oldRaw.(*OscCluster)
-	if !reflect.DeepEqual(r.Spec, old.Spec) {
+
+	oscClusterLog.Info("validate update old loadBalanceName", "loadBalanceName", old.Spec.Network.LoadBalancer.LoadBalancerName)
+	oscClusterLog.Info("validate update old loadBalanceName", "loadBalanceName", r.Spec.Network.LoadBalancer.LoadBalancerName)
+
+	if !reflect.DeepEqual(r.Spec.Network.LoadBalancer.LoadBalancerName, old.Spec.Network.LoadBalancer.LoadBalancerName) {
 		allErrs = append(allErrs,
-			field.Invalid(field.NewPath("OscCluster", "spec"), r, "field is immutable"),
+			field.Invalid(field.NewPath("spec", "loadBalancerName"),
+				r.Spec.Network.LoadBalancer.LoadBalancerName, "field is immutable"),
 		)
 	}
 	if len(allErrs) == 0 {
