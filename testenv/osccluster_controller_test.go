@@ -20,13 +20,14 @@ import (
 	"crypto/tls"
 	"encoding/json"
 	"fmt"
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
 	"io/ioutil"
 	network "net"
 	"net/http"
 	"os"
 	"time"
+
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
 
 	infrastructurev1beta1 "github.com/outscale-dev/cluster-api-provider-outscale.git/api/v1beta1"
 	"github.com/outscale-dev/cluster-api-provider-outscale.git/cloud/scope"
@@ -1086,7 +1087,7 @@ var _ = Describe("Outscale Cluster Reconciler", func() {
 						PrivateIps: []infrastructurev1beta1.OscPrivateIpElement{
 							{
 								Name:      "cluster-api-privateip-kcp",
-                PrivateIp: "10.0.4.10",
+								PrivateIp: "10.0.4.10",
 							},
 						},
 					},
@@ -1095,6 +1096,4 @@ var _ = Describe("Outscale Cluster Reconciler", func() {
 			createCheckDeleteOscClusterMachine(ctx, infraClusterSpec, infraMachineSpec)
 		})
 	})
-})								
- 
-
+})
